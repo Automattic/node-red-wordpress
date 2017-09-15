@@ -9,13 +9,15 @@ Magical things happen when you combine *WordPress* with *Node Red*. This plugine
 
 ### API Usage
 
-The following new methods are exposed:
+The following new endpoints are exposed:
 
 - Get data by key: `/wp-json/nrwp/v1/get/<key>`
 - Set data: `/wp-json/nrwp/v1/set/<key>/<value>`
 - Get data keys: `/wp-json/nrwp/v1/get_keys`
 - Get all keys and data: `/wp-json/nrwp/v1/get_all`
 - Get stats (when Jetpack is enabled): `/wp-json/nrwp/v1/get_stats`
+
+Simplicity is key here. All API requests should use method `GET` and require no parameters.
 
 ### Shortcode Usage
 
