@@ -54,6 +54,7 @@ class Node_Red_WP_REST {
 			'callback' => array( $this, 'endpoint__get_all' ),
 		) );
 
+		// Get stats from Jetpack
 		register_rest_route( 'nrwp/v1', '/get_stats', array(
 			'methods' => 'GET',
 			'callback' => array( $this, 'endpoint__get_stats' ),
