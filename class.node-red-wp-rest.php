@@ -53,6 +53,12 @@ class Node_Red_WP_REST {
 			'methods' => 'GET',
 			'callback' => array( $this, 'endpoint__get_all' ),
 		) );
+
+		// Get stats from Jetpack
+		register_rest_route( 'nrwp/v1', '/get_stats', array(
+			'methods' => 'GET',
+			'callback' => array( $this, 'endpoint__get_stats' ),
+		) );
 	}
 
 	/**
@@ -72,7 +78,7 @@ class Node_Red_WP_REST {
 		$data = $nrwp->data->get( $request['key'] );
 
 		if ( null === $data ) {
-			return $this->format_response( false, false, true, 'no data found for key' );
+			return $this->format_response( false, false, true, 'No data was found for this key.' );
 		}
 
 		return $this->format_response( true, $data );
@@ -95,9 +101,9 @@ class Node_Red_WP_REST {
 		$stat = $nrwp->data->set( $request['key'], $request['val'] );
 
 		if ( $stat ) {
-			return $this->format_response( true, false, false, 'value updated' );
+			return $this->format_response( true, false, false, 'Value updated.' );
 		} else {
-			return $this->format_response( false, false, true, 'value not changed' );
+			return $this->format_response( false, false, true, 'Not updated. Value did not change.' );
 		}
 	}
 
@@ -135,6 +141,26 @@ class Node_Red_WP_REST {
 		$data = $nrwp->data->get_all();
 
 		return $this->format_response( true, $data );
+	}
+
+	/**
+	 * Get an array of stats data from Jetpack
+	 *
+	 * @param WP_Rest_Requeset $request The REST API request object
+	 *
+	 * @uses stats_get_from_restapi()
+	 * @uses $this->format_response()
+	 *
+	 * @return array Formatted API response
+	 */
+	function endpoint__get_stats( $request ) {
+		if ( ! function_exists( 'stats_get_from_restapi' ) ) {
+			return $this->format_response( false, false, true, 'This feature is not available. Please install the Jetpack plugin.' );
+		}
+
+		$stats = stats_get_from_restapi();
+
+		return $this->format_response( true, $stats->stats );
 	}
 
 	/**
