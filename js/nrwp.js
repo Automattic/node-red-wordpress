@@ -20,6 +20,19 @@ jQuery( document ).ready( function( $ ) {
 					
 					// Add/update body atts
 					$( 'body' ).attr( 'nrwp-' + dataKey, response.data );
+
+					// Change background colors if these are accel readings
+					if ( dataKey.includes( 'bean' ) ) {
+						if ( parseFloat( response.data ) < -1 || parseFloat( response.data ) > 1 ) {
+							$( className ).css( 'background', '#f00' );
+						} else if ( parseFloat( response.data ) < -.5 || parseFloat( response.data ) > .5 ) {
+							$( className ).css( 'background', '#faa' );
+						} else if ( parseFloat( response.data ) < -.1 || parseFloat( response.data ) > .1 ) {
+							$( className ).css( 'background', '#0f0' );
+						} else {
+							$( className ).css( 'background', 'transparent' );
+						}
+					}
 				}
 			} );
 		} );

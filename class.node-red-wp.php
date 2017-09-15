@@ -72,4 +72,13 @@ class Node_Red_WP {
 		wp_enqueue_script( 'nrwp' );
 	}
 
+	/**
+	 * Register our widgets
+	 *
+	 * @uses register_widget()
+	 */
+	function action__widgets_init() {
+		register_widget( 'Node_Red_WP_Data_Widget' );
+	}
+
 }

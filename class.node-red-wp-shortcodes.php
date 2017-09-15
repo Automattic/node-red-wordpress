@@ -43,7 +43,8 @@ class Node_Red_WP_Shortcodes {
 		$val = null !== $val ? $val : '[undefined]';
 
 		// Create the shortcode markup
-		return sprintf( '<span class="nrwp-data nrwp-data-%s" data-key="%s">%s</span>',
+		return sprintf( '<h2 class="entry-title">%s</h2><span class="nrwp-data nrwp-data-%s" data-key="%s">%s</span>',
+			esc_attr( $atts['title'] ),
 			esc_attr( $atts['key'] ),
 			esc_attr( $atts['key'] ),
 			esc_html( $val )
