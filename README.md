@@ -26,6 +26,7 @@ Simplicity is key here. All API requests should use method `GET` and require no 
 Prime your site with data using the `set` API request above. For example, make the following requests from your terminal:
 
 `curl -i https://yoursite.com/wp-json/nrwp/v1/set/temperature1/50.5`
+
 `curl -i https://yoursite.com/wp-json/nrwp/v1/set/temperature2/78.3`
 
 These data points can come from Node-RED, or directly from other IOT devices.
